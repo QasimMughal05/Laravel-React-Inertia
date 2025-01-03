@@ -1,15 +1,26 @@
 // import Layout from "../Layouts/layout";
-import { Link } from '@inertiajs/react';
+import { Link,usePage } from '@inertiajs/react';
 
 import { data } from 'autoprefixer';
-import React from 'react';
+import React, { useState } from 'react';
+import { useRoute } from "../../../vendor/tightenco/ziggy";
 
 export default function Home({ posts }){
+    const route = useRoute();
+    const {flash} = usePage().props;
+    const [flashgMsg, setFlashMsg ] = useState(flash.message);
 
-    console.log(posts);
+    setTimeout(()=>{
+        setFlashMsg(null)
+    },2000);
+
+    // console.log(usePage());
 return <>
     {/* <h1 className='title'>Hello {name}</h1> */}
     <h1 className='title'>Hello</h1>
+    { flashgMsg && <div className='absolute top-26 right-6 bg-rose-500 p-2
+     rounded-md text-sm text-white'>
+        {flashgMsg}</div> }
 
     {/* <Link preserveScroll href='/' className='block title mt-[1000px]'>
     {new Date().toLocaleTimeString()}
@@ -23,8 +34,9 @@ return <>
                         <span>{ new Date(post.created_at).toLocaleDateString()
                             }</span>
                     </div>
-
-                <p className='font-medium'>{post.body}</p>
+                    <p className='font-medium'>{post.body}</p>
+                    {/* <Link href={`/posts/${post.id}`} className='text-link '>Read More...</Link> */}
+                    <Link href={route('posts.show', post)} className='text-link'>Read More...</Link>
             </div>
             )
             
