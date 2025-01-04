@@ -1,5 +1,5 @@
 // import Layout from "../Layouts/layout";
-import { Link,usePage } from '@inertiajs/react';
+import { Head,Link,usePage } from '@inertiajs/react';
 
 import { data } from 'autoprefixer';
 import React, { useState } from 'react';
@@ -9,6 +9,7 @@ export default function Home({ posts }){
     const route = useRoute();
     const {flash} = usePage().props;
     const [flashgMsg, setFlashMsg ] = useState(flash.message);
+    const { component } = usePage();
 
     setTimeout(()=>{
         setFlashMsg(null)
@@ -16,11 +17,16 @@ export default function Home({ posts }){
 
     // console.log(usePage());
 return <>
+    <Head title={component}/>
     {/* <h1 className='title'>Hello {name}</h1> */}
     <h1 className='title'>Hello</h1>
     { flashgMsg && <div className='absolute top-26 right-6 bg-rose-500 p-2
      rounded-md text-sm text-white'>
         {flashgMsg}</div> }
+
+        { flash.success && <div className='absolute top-26 right-6 bg-green-500 p-2
+     rounded-md text-sm text-white'>
+        {flash.success}</div> }
 
     {/* <Link preserveScroll href='/' className='block title mt-[1000px]'>
     {new Date().toLocaleTimeString()}
