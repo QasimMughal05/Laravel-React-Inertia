@@ -18,7 +18,6 @@ use App\Http\Controllers\PageController;
 Route::get('/',[PostController::class, 'index']);
 
 Route::get('/aboutus', function() {
-    // dd("hello about us page");
     return  inertia('About/AboutUs');
     
 });
